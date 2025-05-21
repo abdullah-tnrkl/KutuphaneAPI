@@ -14,7 +14,7 @@ namespace KutuphaneAPI.Domain.Entities
         public string YayinEvi { get; set; } = string.Empty;
         public int SayfaSayisi { get; set; }
         public int StokAdedi { get; set; }
-        public byte[]? GorselVerisi { get; set; }  // 👈 Yeni alan
+        public byte[]? GorselVerisi { get; set; }  
 
 
 

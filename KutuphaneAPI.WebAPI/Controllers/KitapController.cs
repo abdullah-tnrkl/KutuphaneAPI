@@ -23,6 +23,7 @@ namespace KutuphaneAPI.WebAPI.Controllers
             return Ok(kitaplar);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> KitapEkle([FromForm] KitapEkleDto dto)
         {
@@ -31,17 +32,17 @@ namespace KutuphaneAPI.WebAPI.Controllers
 
             var kitap = new Kitap
             {
-                Ad = dto.Ad,
-                Yazar = dto.Yazar,
-                YayinEvi = dto.YayinEvi ?? "",
-                SayfaSayisi = dto.SayfaSayisi,
-                StokAdedi = dto.StokAdedi
+                Ad = dto.ad,
+                Yazar = dto.yazar,
+                YayinEvi = dto.yayinEvi ?? "",
+                SayfaSayisi = dto.sayfaSayisi,
+                StokAdedi = dto.stokAdedi
             };
 
-            if (dto.Gorsel != null && dto.Gorsel.Length > 0)
+            if (dto.gorselVerisi != null && dto.gorselVerisi.Length > 0)
             {
                 using var ms = new MemoryStream();
-                await dto.Gorsel.CopyToAsync(ms);
+                await dto.gorselVerisi.CopyToAsync(ms);
                 kitap.GorselVerisi = ms.ToArray();
             }
 

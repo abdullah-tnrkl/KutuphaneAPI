@@ -7,22 +7,22 @@ namespace KutuphaneAPI.Application.DTOs
     {
         [Required(ErrorMessage = "Kitap adı zorunludur.")]
         [MaxLength(100)]
-        public string Ad { get; set; }
+        public string ad { get; set; }
 
         [Required(ErrorMessage = "Yazar adı zorunludur.")]
         [MaxLength(100)]
-        public string Yazar { get; set; }
+        public string yazar { get; set; }
 
         [MaxLength(100)]
-        public string? YayinEvi { get; set; }
+        public string? yayinEvi { get; set; }
 
         [Range(1, 5000, ErrorMessage = "Sayfa sayısı 1 ile 5000 arasında olmalı.")]
-        public int SayfaSayisi { get; set; }
+        public int sayfaSayisi { get; set; }
 
         [Range(0, int.MaxValue)]
-        public int StokAdedi { get; set; }
+        public int stokAdedi { get; set; }
 
-        public IFormFile? Gorsel { get; set; }
+        public IFormFile? gorselVerisi { get; set; }
 
 
     }
