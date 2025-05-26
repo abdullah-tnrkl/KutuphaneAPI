@@ -16,7 +16,7 @@ namespace KutuphaneAPI.WebAPI.Controllers
             _oduncService = oduncService;
         }
 
-        [HttpGet]
+       
         [HttpGet]
         public async Task<IActionResult> TumOduncIslemleri()
         {

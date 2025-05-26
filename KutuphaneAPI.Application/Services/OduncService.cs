@@ -35,7 +35,7 @@ namespace KutuphaneAPI.Application.Services
                 .Include(o => o.Kitap)
                 .FirstOrDefaultAsync(o => o.Id == oduncId);
 
-            if (odunc == null || odunc.IadeTarihi != null)
+            if (odunc == null )
                 return false;
 
             odunc.IadeTarihi = DateTime.Now;
@@ -66,7 +66,8 @@ namespace KutuphaneAPI.Application.Services
                         Ad = x.Kitap.Ad,
                         Yazar = x.Kitap.Yazar,
                         YayinEvi = x.Kitap.YayinEvi,
-                        SayfaSayisi = x.Kitap.SayfaSayisi
+                        SayfaSayisi = x.Kitap.SayfaSayisi,
+                        StokAdedi=x.Kitap.StokAdedi
                     }
                 })
                 .ToListAsync();
