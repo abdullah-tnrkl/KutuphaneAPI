@@ -60,11 +60,11 @@ namespace KutuphaneAPI.Application.Services
                     IadeTarihi = x.IadeTarihi,
                     Kitap = new KitapDto
                     {
-                        ıd = x.Kitap.Id,
-                        ad = x.Kitap.Ad,
-                        yazar = x.Kitap.Yazar,
-                        yayinEvi = x.Kitap.YayinEvi,
-                        sayfaSayisi = x.Kitap.SayfaSayisi
+                        Id = x.Kitap.Id,
+                        Ad = x.Kitap.Ad,
+                        Yazar = x.Kitap.Yazar,
+                        YayinEvi = x.Kitap.YayinEvi,
+                        SayfaSayisi = x.Kitap.SayfaSayisi
                     }
                 })
                 .ToListAsync();

@@ -10,5 +10,7 @@ namespace KutuphaneAPI.Application.Services
         Task<Kitap?> KitapGetirAsync(int id);
         Task<Kitap?> KitapGuncelleAsync(Kitap kitap);
         Task<bool> KitapSilAsync(int id);
+
+        Task<Kitap> GetByIdAsync(int id);
     }
 }

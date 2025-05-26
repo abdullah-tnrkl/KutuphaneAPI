@@ -62,6 +62,10 @@ namespace KutuphaneAPI.Application.Services
             return true;
         }
 
+        public async Task<Kitap> GetByIdAsync(int id)
+        {
+            return await _context.Kitaplar.FindAsync(id);
+        }
 
     }
 }

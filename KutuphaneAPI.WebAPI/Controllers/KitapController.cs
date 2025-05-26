@@ -32,17 +32,19 @@ namespace KutuphaneAPI.WebAPI.Controllers
 
             var kitap = new Kitap
             {
-                Ad = dto.ad,
-                Yazar = dto.yazar,
-                YayinEvi = dto.yayinEvi ?? "",
-                SayfaSayisi = dto.sayfaSayisi,
-                StokAdedi = dto.stokAdedi
+                Ad = dto.Ad,
+                Yazar = dto.Yazar,
+                YayinEvi = dto.YayinEvi ?? "",
+                SayfaSayisi = dto.SayfaSayisi,
+                StokAdedi = dto.StokAdedi,
+                Ozet = dto.Ozet
+
             };
 
-            if (dto.gorselVerisi != null && dto.gorselVerisi.Length > 0)
+            if (dto.GorselVerisi != null && dto.GorselVerisi.Length > 0)
             {
                 using var ms = new MemoryStream();
-                await dto.gorselVerisi.CopyToAsync(ms);
+                await dto.GorselVerisi.CopyToAsync(ms);
                 kitap.GorselVerisi = ms.ToArray();
             }
 
@@ -58,16 +60,39 @@ namespace KutuphaneAPI.WebAPI.Controllers
             return Ok(kitap);
         }
 
+     
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> KitapGuncelle(int id, [FromBody] Kitap kitap)
+        public async Task<IActionResult> KitapGuncelle(int id, [FromForm] KitapGuncelleDto dto)
         {
-            if (id != kitap.Id) return BadRequest("ID uyuşmuyor.");
+            if (id != dto.Id)
+                return BadRequest(new { message = "ID uyuşmuyor." });
+
+
+            var kitap = await _kitapService.GetByIdAsync(id);
+            if (kitap == null) return NotFound();
+
+            kitap.Ad = dto.Ad;
+            kitap.Yazar = dto.Yazar;
+            kitap.YayinEvi = dto.YayinEvi ?? "";
+            kitap.SayfaSayisi = dto.SayfaSayisi;
+            kitap.StokAdedi = dto.StokAdedi;
+            kitap.Ozet = dto.Ozet;
+
+            if (dto.GorselVerisi != null && dto.GorselVerisi.Length > 0)
+            {
+                using var ms = new MemoryStream();
+                await dto.GorselVerisi.CopyToAsync(ms);
+                kitap.GorselVerisi = ms.ToArray();
+            }
 
             var guncellenen = await _kitapService.KitapGuncelleAsync(kitap);
+
             if (guncellenen == null) return NotFound();
 
             return Ok(guncellenen);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> KitapSil(int id)
