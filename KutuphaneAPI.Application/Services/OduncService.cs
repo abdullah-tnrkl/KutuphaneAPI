@@ -12,6 +12,8 @@ namespace KutuphaneAPI.Application.Services
         public OduncService(KutuphaneDbContext context)
         {
             _context = context;
+
+
         }
 
         public async Task<KitapOdunc?> KitapOduncAlAsync(KitapOdunc odunc)
