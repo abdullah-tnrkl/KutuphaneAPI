@@ -51,7 +51,10 @@ namespace KutuphaneAPI.WebAPI.Controllers
             var sonuc = await _oduncService.KitapIadeEtAsync(oduncId);
             if (!sonuc)
                 return NotFound("İade edilebilecek bir ödünç işlemi bulunamadı.");
-            return Ok("İade işlemi başarıyla tamamlandı.");
+            return Ok(new { mesaj = "İade işlemi başarıyla tamamlandı." });
+
         }
+
+
     }
 }

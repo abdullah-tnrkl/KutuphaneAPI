@@ -4,6 +4,7 @@ using KutuphaneAPI.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KutuphaneAPI.DataAccess.Migrations
 {
     [DbContext(typeof(KutuphaneDbContext))]
-    partial class KutuphaneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250526122523_iadeGuncelleme")]
+    partial class iadeGuncelleme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,42 +24,6 @@ namespace KutuphaneAPI.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("KutuphaneAPI.Domain.Entities.IslemLogu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Detaylar")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EntityAdi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EntityId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IslemTuru")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KullaniciAdi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Tarih")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IslemLoglari");
-                });
 
             modelBuilder.Entity("KutuphaneAPI.Domain.Entities.Kitap", b =>
                 {
@@ -114,6 +81,9 @@ namespace KutuphaneAPI.DataAccess.Migrations
                     b.Property<DateTime>("AlisTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IadeEdildi")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("IadeTarihi")
                         .HasColumnType("datetime2");
 
@@ -125,34 +95,6 @@ namespace KutuphaneAPI.DataAccess.Migrations
                     b.HasIndex("KitapId");
 
                     b.ToTable("KitapOduncIslemleri");
-                });
-
-            modelBuilder.Entity("KutuphaneAPI.Domain.Entities.LogKaydi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Aciklama")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IslemTipi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Kullanici")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Tarih")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LogKayitlari");
                 });
 
             modelBuilder.Entity("KutuphaneAPI.Domain.Entities.KitapOdunc", b =>

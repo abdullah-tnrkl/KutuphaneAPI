@@ -18,6 +18,8 @@ builder.Services.AddDbContext<KutuphaneDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("KutuphaneDb")));
 builder.Services.AddScoped<IKitapService, KitapService>();
 builder.Services.AddScoped<IOduncService, OduncService>();
+builder.Services.AddScoped<ILoglamaService, LoglamaService>();
+
 
 // **AddCors buraya taþýndý**
 builder.Services.AddCors(options =>

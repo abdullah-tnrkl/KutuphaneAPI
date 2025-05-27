@@ -8,5 +8,7 @@
         public DateTime AlisTarihi { get; set; }
         public DateTime? IadeTarihi { get; set; }
         public KitapDto Kitap { get; set; }
+
+
     }
 }

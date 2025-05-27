@@ -10,10 +10,11 @@ namespace KutuphaneAPI.WebAPI.Controllers
     public class KitapController : ControllerBase
     {
         private readonly IKitapService _kitapService;
-
-        public KitapController(IKitapService kitapService)
+        private readonly ILoglamaService _loglamaService;
+        public KitapController(IKitapService kitapService, ILoglamaService loglamaService)
         {
             _kitapService = kitapService;
+            _loglamaService = loglamaService;
         }
 
         [HttpGet]
@@ -49,6 +50,7 @@ namespace KutuphaneAPI.WebAPI.Controllers
             }
 
             var yeniKitap = await _kitapService.KitapEkleAsync(kitap);
+            await _loglamaService.LogEkleAsync("Ekleme", $"Yeni kitap eklendi: {kitap.Ad}");
             return CreatedAtAction(nameof(TumKitaplariGetir), new { id = yeniKitap.Id }, yeniKitap);
         }
 
@@ -89,6 +91,8 @@ namespace KutuphaneAPI.WebAPI.Controllers
             var guncellenen = await _kitapService.KitapGuncelleAsync(kitap);
 
             if (guncellenen == null) return NotFound();
+            await _loglamaService.LogEkleAsync("Güncelleme", $"Kitap güncellendi: {kitap.Ad}");
+
 
             return Ok(guncellenen);
         }
@@ -97,8 +101,14 @@ namespace KutuphaneAPI.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> KitapSil(int id)
         {
+            var kitap = await _kitapService.GetByIdAsync(id);
+            if (kitap == null) return NotFound();
+
             var silindi = await _kitapService.KitapSilAsync(id);
             if (!silindi) return NotFound();
+
+            await _loglamaService.LogEkleAsync("Silme", $"Kitap silindi: {kitap.Ad}");
+
             return NoContent();
         }
 

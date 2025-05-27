@@ -10,6 +10,12 @@ namespace KutuphaneAPI.DataAccess.Context
         public DbSet<Kitap> Kitaplar { get; set; }
         public DbSet<KitapOdunc> KitapOduncIslemleri { get; set; }
 
+        public DbSet<IslemLogu> IslemLoglari { get; set; }
+
+        public DbSet<LogKaydi> LogKayitlari { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

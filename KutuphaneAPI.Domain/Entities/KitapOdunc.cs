@@ -16,5 +16,7 @@ namespace KutuphaneAPI.Domain.Entities
         public DateTime? IadeTarihi { get; set; }
 
         public Kitap Kitap { get; set; }
+
+
     }
 }
