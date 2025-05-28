@@ -37,12 +37,14 @@ namespace KutuphaneAPI.WebAPI.Controllers
                 AlanKisiAd = dto.AlanKisiAd,
                 AlanKisiSoyad = dto.AlanKisiSoyad,
                 IadeTarihi = dto.IadeTarihi,
-                AlisTarihi = DateTime.Now
+                AlisTarihi = DateTime.Now,
+                IadeEdildi = false // <- önemli eklenti
             };
 
             var sonuc = await _oduncService.KitapOduncAlAsync(odunc);
             return Ok(sonuc);
         }
+
 
 
         [HttpPost("iade/{oduncId}")]

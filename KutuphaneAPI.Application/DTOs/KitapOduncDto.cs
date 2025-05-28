@@ -8,7 +8,7 @@
         public DateTime AlisTarihi { get; set; }
         public DateTime? IadeTarihi { get; set; }
         public KitapDto Kitap { get; set; }
-
+        public bool IadeEdildi { get; set; } // Yeni alan
 
     }
 }

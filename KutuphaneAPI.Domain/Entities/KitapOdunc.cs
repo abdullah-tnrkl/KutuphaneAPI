@@ -17,6 +17,6 @@ namespace KutuphaneAPI.Domain.Entities
 
         public Kitap Kitap { get; set; }
 
-
+        public bool IadeEdildi { get; set; } = false; // Yeni alan
     }
 }

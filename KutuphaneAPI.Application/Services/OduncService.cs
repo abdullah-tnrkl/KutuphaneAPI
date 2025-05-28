@@ -35,14 +35,18 @@ namespace KutuphaneAPI.Application.Services
                 .Include(o => o.Kitap)
                 .FirstOrDefaultAsync(o => o.Id == oduncId);
 
-            if (odunc == null )
+            // Zaten iade edilmişse işlem yapma
+            if (odunc == null || odunc.IadeEdildi)
                 return false;
 
             odunc.IadeTarihi = DateTime.Now;
+            odunc.IadeEdildi = true;
             odunc.Kitap.StokAdedi += 1;
+
             await _context.SaveChangesAsync();
             return true;
         }
+
 
         public async Task<Kitap?> GetKitapByIdAsync(int id)
         {
@@ -60,6 +64,7 @@ namespace KutuphaneAPI.Application.Services
                     AlanKisiSoyad = x.AlanKisiSoyad,
                     AlisTarihi = x.AlisTarihi,
                     IadeTarihi = x.IadeTarihi,
+                    IadeEdildi = x.IadeEdildi,
                     Kitap = new KitapDto
                     {
                         Id = x.Kitap.Id,
